@@ -1,0 +1,10 @@
+.loginContainer {
+  position: relative;
+  top: 50%; }
+  .loginContainer .loginButton {
+    color: #000000;
+    background-color: rgba(201, 38, 141, 0.1);
+    border: 2px solid #C9268D; }
+    .loginContainer .loginButton:hover {
+      color: #ffffff;
+      background-color: #C9268D; }
