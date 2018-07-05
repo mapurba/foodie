@@ -9,6 +9,7 @@ const keys = require('./config/keys');
 const passportSetup = require('./config/passport-setup');
 const User = mongoose.model('User');
 
+let api=require("./routes/api");
 
 // MONGODB CONNECTION. mongodb ATLAS
 
@@ -57,7 +58,7 @@ app.get('/auth-success', passport.authenticate('google', {session: false}), (req
 
 // route to check token with postman.
 // using middleware to check for authorization header
-app.get('/verify', authService.checkTokenMW, (req, res) => {
+app.get('/api/verify', authService.checkTokenMW, (req, res) => {
     authService.verifyToken(req, res);
     if (null === req.authData) {
         res.sendStatus(403);
@@ -66,21 +67,9 @@ app.get('/verify', authService.checkTokenMW, (req, res) => {
     }
 });
 
-// List all the Users
-app.get('/api/users/list', authService.checkTokenMW, (req, res) => {
-    // authService.verifyToken(req, res);
-    // if (null === req.authData) {
-    //     res.sendStatus(403);
-    // } else {
-        User.find({}, function(err, users) {
-            if (err) throw err;
-            // object of all the users
-            // console.log(users);
-            res.json(users);
 
-        });
-    // }
-});
+
+app.use('/api', api);
 
 
 
