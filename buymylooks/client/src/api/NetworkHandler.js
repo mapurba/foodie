@@ -16,7 +16,7 @@ export default {
       HEADER_CONFIG.headers = additionalHeaders;
     }
     if (accessToken) {
-      HEADER_CONFIG.headers['authorization'] = 'bearer '+'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1YjNjZWZkYmQ4ZGExNzI2NjBjNzRhY2MiLCJpYXQiOjE1MzA3ODMxOTksImV4cCI6MTUzMDc4MzQ5OX0.N1OILwC-9zGviKsNYhSUuId1HdQaok7JmymZkfSkjTc';
+      HEADER_CONFIG.headers['authorization'] = 'bearer '+'';
     }
 
     return processRequest(method, baseQuery, requestData, HEADER_CONFIG)

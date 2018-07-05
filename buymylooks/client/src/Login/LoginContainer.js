@@ -36,7 +36,7 @@ class LoginContainer extends Component {
 		window.location.search = "";
 	}
 	signIn = () => {
-		let baseQuery = "/authorize_user"
+		let baseQuery = "/auth/google"
 		NetworkHandler.sendRequest("GET", baseQuery, null, null, null)
 			.then((response) => {
 				window.location = response.request.responseURL;
