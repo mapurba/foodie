@@ -12,7 +12,8 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "redux": "^4.0.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "semantic-ui-list": "^2.3.1"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
@@ -26,7 +27,8 @@
     "build-dev": "cat .env.local > .env && npm-run-all build-css build-js",
     "build": "npm-run-all build-css build-js",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "proxy": "http://localhost:8081"
   },
   "devDependencies": {
     "semantic-ui": "^2.3.2"
