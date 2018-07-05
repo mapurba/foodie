@@ -30,7 +30,12 @@ exports.signToken = (req, res) => {
         if(err){
             res.sendStatus(500);
         } else {
-            res.json({token});
+
+            let redirect_uri = 'http://localhost:3000/#/feed';
+
+            console.log('Loggedin User name ',token);
+            res.cookie('acccessToken', token);
+            res.redirect(redirect_uri);
         }
     });
 }

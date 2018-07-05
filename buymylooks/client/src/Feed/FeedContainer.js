@@ -21,7 +21,7 @@ class FeedContainer extends Component {
 		})
 	}
 	getUsersList =() =>{
-        NetworkHandler.sendRequest("GET", '/users/list', null, null, null)
+        NetworkHandler.sendRequest("GET", '/users/list', null, true, null)
             .then((response) => {
                 console.log(response);
             })
