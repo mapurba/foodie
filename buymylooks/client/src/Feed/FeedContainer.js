@@ -29,12 +29,21 @@ class FeedContainer extends Component {
                 throw err;
             })
 	}
+getUsersDetails =() =>{
+    NetworkHandler.sendRequest("GET", '/api/users/details', null, true, null)
+        .then((response) => {
+        console.log(response);
+})
+.catch((err) => {
+        throw err;
+})
+}
 	render() {
 		return (
 			<div>
 				{
 					this.state.loggedIn ?
-						<Feed signOut={this.signOut} getUsersList={this.getUsersList} />
+						<Feed signOut={this.signOut} getUsersList={this.getUsersList} getUsersDetails={this.getUsersDetails} />
 						: <Redirect to="/login" />
 				}
 			</div>

@@ -11,7 +11,7 @@ exports.checkTokenMW = (req, res, next) => {
             if(err) {
                 res.sendStatus(403);
             } else {
-                // return req.authData = authData;
+                 req.authData = authData;
                 next();
             }
         })
@@ -24,7 +24,7 @@ exports.checkTokenMW = (req, res, next) => {
 
 // Issue Token
 exports.signToken = (req, res) => {
-    jwt.sign({userId: req.user._id}, 'secretkey', {expiresIn:'5 min'}, (err, token) => {
+    jwt.sign({userId: req.user._id, email:req.user.email}, 'secretkey', {expiresIn:'5 min'}, (err, token) => {
         if(err){
             res.sendStatus(500);
         } else {
