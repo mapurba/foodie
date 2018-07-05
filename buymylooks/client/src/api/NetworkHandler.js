@@ -1,4 +1,7 @@
 import axios from 'axios';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 const api = axios.create({
   baseURL: "http://localhost:8081/",
@@ -16,7 +19,7 @@ export default {
       HEADER_CONFIG.headers = additionalHeaders;
     }
     if (accessToken) {
-      HEADER_CONFIG.headers['authorization'] = 'bearer '+'';
+      HEADER_CONFIG.headers['authorization'] = 'bearer '+cookies.get('acccessToken');
     }
 
     return processRequest(method, baseQuery, requestData, HEADER_CONFIG)

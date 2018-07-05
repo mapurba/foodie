@@ -32,6 +32,7 @@ app.use(function (req, res, next) {
     res.header('Access-Control-Expose-Headers', 'Content-Disposition');
     next();
 });
+
 app.use(passport.initialize());
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({extended: true})); // for parsing application/x-www-form-urlencoded
@@ -56,7 +57,7 @@ app.get('/auth-success', passport.authenticate('google', {session: false}), (req
 
 // route to check token with postman.
 // using middleware to check for authorization header
-app.get('/verify', authService.checkTokenMW, (req, res) => {
+app.get('/api/verify', authService.checkTokenMW, (req, res) => {
     authService.verifyToken(req, res);
     if (null === req.authData) {
         res.sendStatus(403);
@@ -66,8 +67,8 @@ app.get('/verify', authService.checkTokenMW, (req, res) => {
 });
 
 // List all the Users
-app.get('/users/list', authService.checkTokenMW, (req, res) => {
-    // authService.verifyToken(req, res);
+app.get('/api/users/list', authService.checkTokenMW, (req, res) => {
+    authService.verifyToken(req, res);
     if (null === req.authData) {
         // res.sendStatus(403);
     } else {
