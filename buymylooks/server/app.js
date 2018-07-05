@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 require('./Model/User/User');
+require('./Model/User/userdemo');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
@@ -8,6 +9,7 @@ const authService = require('./Services/AuthService');
 const keys = require('./config/keys');
 const passportSetup = require('./config/passport-setup');
 const User = mongoose.model('User');
+const userSchemaDemo = mongoose.model('userSchemaDemo');
 
 let api=require("./routes/api");
 
@@ -46,24 +48,33 @@ app.use(function (err, req, res, next) {
 
 // ############# GOOGLE AUTHENTICATION ################
 // this will call passport-setup.js authentication in the config directory
-app.get('/auth/google', passport.authenticate('google', {
-    session: false,
-    scope: ['profile', 'email']
-}));
+app.get('/auth/google',
+
+    passport.authenticate('google', {
+        session: false,
+        scope: ['profile', 'email'],
+    }), (req, res) => {
+        // authService.signToken(req, res);
+        console.log('hi iam logg');
+    });
 
 // callback url upon successful google authentication
 app.get('/auth-success', passport.authenticate('google', {session: false}), (req, res) => {
+    console.log('hi iam loggda344');
     authService.signToken(req, res);
 });
 
 // route to check token with postman.
 // using middleware to check for authorization header
 app.get('/api/verify', authService.checkTokenMW, (req, res) => {
-    authService.verifyToken(req, res);
+
     if (null === req.authData) {
         res.sendStatus(403);
     } else {
-        res.json(req.authData);
+        userSchemaDemo.find({}, (err, data) => {
+            res.json(data);
+        })
+        // res.json(req.authData);
     }
 });
 
