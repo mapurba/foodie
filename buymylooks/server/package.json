@@ -27,7 +27,7 @@
   "devDependencies": {
     "concurrently": "^3.5.1",
     "css-loader": "^0.28.8",
-    "nodemon": "^1.14.8",
+    "nodemon": "^1.17.5",
     "pushover-notifications": "^0.2.4",
     "webpack": "^3.10.0"
   }

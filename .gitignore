@@ -59,7 +59,7 @@ typings/
 
 # next.js build output
 .next
-/.idea/
+.idea/
 .idea/buymylooks.iml
 .idea/inspectionProfiles/
 .idea/modules.xml
