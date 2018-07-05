@@ -1,9 +1,10 @@
 import React from 'react';
 
-const Feed = ({ getUsersList }) => (
+const Feed = ({ getUsersList, getUsersDetails }) => (
   <div>
 
       <button onClick={getUsersList}>get user list</button>
+      <button onClick={getUsersDetails}>get user Details</button>
       <div className="ui  list">
 
           <div className="item">

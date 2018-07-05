@@ -13,12 +13,24 @@ const User = mongoose.model('User');
 
 
 
+router.get('/users/details', authService.checkTokenMW,(req,res)=> {
+    console.log(req.authData);
+res.send("hello world");
 
+
+}
+);
 
 
 // List all the Users
 router.get('/users/list', authService.checkTokenMW,(req,res)=> {
-    res.send("hello world");
+    console.log(req.authData.email);
+    User.find({},(err, data)=>{
+        res.send(data);
+
+})
+    //res.send("hello world");
+
 
 }
 );
