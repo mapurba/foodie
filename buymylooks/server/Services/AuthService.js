@@ -7,22 +7,20 @@ exports.checkTokenMW = (req, res, next) => {
     const bearerHeader = req.headers['authorization'];
     if (typeof bearerHeader !== 'undefined') {
         req.token = bearerHeader.split(' ')[1];
-        next();
+        jwt.verify(req.token, 'secretkey', (err, authData) => {
+            if(err) {
+                res.sendStatus(403);
+            } else {
+                // return req.authData = authData;
+                next();
+            }
+        })
     } else {
         res.sendStatus(403);
     }
 };
 
-// Verify Token validity and attach token data as request attribute
-exports.verifyToken = (req, res) => {
-    jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if(err) {
-            res.sendStatus(403);
-        } else {
-            return req.authData = authData;
-        }
-    })
-};
+
 
 // Issue Token
 exports.signToken = (req, res) => {

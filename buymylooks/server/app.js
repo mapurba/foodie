@@ -57,7 +57,7 @@ app.get('/auth-success', passport.authenticate('google', {session: false}), (req
 
 // route to check token with postman.
 // using middleware to check for authorization header
-app.get('/api/verify', authService.checkTokenMW, (req, res) => {
+app.get('/verify', authService.checkTokenMW, (req, res) => {
     authService.verifyToken(req, res);
     if (null === req.authData) {
         res.sendStatus(403);
@@ -68,19 +68,18 @@ app.get('/api/verify', authService.checkTokenMW, (req, res) => {
 
 // List all the Users
 app.get('/api/users/list', authService.checkTokenMW, (req, res) => {
-    authService.verifyToken(req, res);
-    if (null === req.authData) {
-        // res.sendStatus(403);
-    } else {
+    // authService.verifyToken(req, res);
+    // if (null === req.authData) {
+    //     res.sendStatus(403);
+    // } else {
         User.find({}, function(err, users) {
             if (err) throw err;
-
             // object of all the users
             // console.log(users);
             res.json(users);
 
         });
-    }
+    // }
 });
 
 
