@@ -13,7 +13,10 @@ const restaurantSchema = new Schema({
         required: [true, 'name required']
     },
     //#todo add secure methoord for password storing
-    admin: Boolean,
+    admin: {
+        type: Boolean,
+        default: true
+    },
     created_at: Date,
     updated_at: Date,
     googleId: {
@@ -24,7 +27,7 @@ const restaurantSchema = new Schema({
 
 
 
-restaurantSchema.methods.create= function () {
+restaurantSchema.methods.customFun= function () {
     // add some stuff to the users name
     // this.name = this.name + '-dude';
 
@@ -46,4 +49,4 @@ restaurantSchema.pre('save', function (next) {
     next();
 });
 
-module.exports = mongoose.model('Restaurant', restaurantSchema);
+module.exports = mongoose.model('restaurantSchema', restaurantSchema);

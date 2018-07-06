@@ -9,7 +9,7 @@ const authService = require('./Services/AuthService');
 const keys = require('./config/keys');
 const passportSetup = require('./config/passport-setup');
 const User = mongoose.model('User');
-const userSchemaDemo = mongoose.model('userSchemaDemo');
+const restaurantSchema = mongoose.model('restaurantSchema');
 
 let api=require("./routes/api");
 
@@ -48,15 +48,10 @@ app.use(function (err, req, res, next) {
 
 // ############# GOOGLE AUTHENTICATION ################
 // this will call passport-setup.js authentication in the config directory
-app.get('/auth/google',
-
-    passport.authenticate('google', {
-        session: false,
-        scope: ['profile', 'email'],
-    }), (req, res) => {
-        // authService.signToken(req, res);
-        console.log('hi iam logg');
-    });
+app.get('/auth/google', passport.authenticate('google', {
+    session: false,
+    scope: ['profile', 'email']
+}));
 
 // callback url upon successful google authentication
 app.get('/auth-success', passport.authenticate('google', {session: false}), (req, res) => {
@@ -71,7 +66,7 @@ app.get('/api/verify', authService.checkTokenMW, (req, res) => {
     if (null === req.authData) {
         res.sendStatus(403);
     } else {
-        userSchemaDemo.find({}, (err, data) => {
+        restaurantSchema.find({}, (err, data) => {
             res.json(data);
         })
         // res.json(req.authData);

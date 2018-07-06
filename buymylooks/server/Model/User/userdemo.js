@@ -2,7 +2,7 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 // Basic User Schema for Google Authentication
-const userSchemaDemo = new Schema({
+const restaurantSchema = new Schema({
     email: {
         type: String,
         required: [true, 'email required'],
@@ -13,10 +13,10 @@ const userSchemaDemo = new Schema({
         required: false
     },
     //#todo add secure methoord for password storing
-    password: {type: String, required: false},
+
     admin: Boolean,
 
-    
+
     created_at: Date,
     updated_at: Date,
     googleId: {
@@ -25,7 +25,7 @@ const userSchemaDemo = new Schema({
     }
 });
 
-userSchemaDemo.methods.customFun = function () {
+restaurantSchema.methods.customFun = function () {
     // add some stuff to the users name
     // this.name = this.name + '-dude';
 
@@ -34,7 +34,7 @@ userSchemaDemo.methods.customFun = function () {
 
 
 // on every save, add the date
-userSchemaDemo.pre('save', function (next) {
+restaurantSchema.pre('save', function (next) {
     // get the current date
     var currentDate = new Date();
 
@@ -49,4 +49,4 @@ userSchemaDemo.pre('save', function (next) {
 });
 
 
-module.exports = mongoose.model('userSchemaDemo', userSchemaDemo);
+module.exports = mongoose.model('restaurantSchema', restaurantSchema);
