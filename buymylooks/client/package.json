@@ -29,10 +29,16 @@
     "build-dev": "cat .env.local > .env && npm-run-all build-css build-js",
     "build": "npm-run-all build-css build-js",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "proxy": "http://localhost:8081"
+    "eject": "react-scripts eject"
+
   },
   "devDependencies": {
     "semantic-ui": "^2.3.2"
+  },
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:8081",
+      "ws": true
+    }
   }
 }

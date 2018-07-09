@@ -36,7 +36,7 @@ class LoginContainer extends Component {
 		window.location.search = "";
 	}
 	signIn = () => {
-		let baseQuery = "/auth/google"
+		let baseQuery = "/auth/google";
 		NetworkHandler.sendRequest("GET", baseQuery, null, null, null)
 			.then((response) => {
 				window.location = response.request.responseURL;
@@ -47,13 +47,26 @@ class LoginContainer extends Component {
 				throw err;
 			})
 	}
+    signInAsResturant = () => {
+        let baseQuery = "/auth/google/resturant";
+        // let requestData={resturant:true};
+        NetworkHandler.sendRequest("GET", baseQuery, null, null, null)
+            .then((response) => {
+                window.location = response.request.responseURL;
+                console.log(response);
+                console.log("Yayy");
+            })
+            .catch((err) => {
+                throw err;
+            })
+    }
 	render() {
 		return (
 			<div>
 				{
 					this.state.loggedIn ?
 						<Redirect to="/feed" />
-						: <Login signIn={this.signIn} loggingIn={this.state.loggingIn} />
+						: <Login signIn={this.signIn} loggingIn={this.state.loggingIn} signInAsResturant={this.signInAsResturant}/>
 				}
 			</div>
 		)

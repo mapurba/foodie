@@ -35,6 +35,13 @@ app.use(function (req, res, next) {
     res.header('Access-Control-Expose-Headers', 'Content-Disposition');
     next();
 });
+passport.serializeUser(function (user, done) {
+    done(null, user);
+});
+
+passport.deserializeUser(function (obj, done) {
+    done(null, obj);
+});
 
 app.use(passport.initialize());
 app.use(bodyParser.json()); // for parsing application/json
@@ -48,14 +55,20 @@ app.use(function (err, req, res, next) {
 
 // ############# GOOGLE AUTHENTICATION ################
 // this will call passport-setup.js authentication in the config directory
-app.get('/auth/google', passport.authenticate('google', {
+app.get('/auth/google', passport.authenticate('google', {session: false, scope: ['profile', 'email']}));
+
+// callback url upon successful google authentication
+app.get('/auth-success/resturant/', passport.authenticate('google-resturant', {session: false}), (req, res) => {
+    authService.signToken(req, res);
+});
+
+app.get('/auth/google/resturant/', passport.authenticate('google-resturant', {
     session: false,
     scope: ['profile', 'email']
 }));
 
 // callback url upon successful google authentication
-app.get('/auth-success', passport.authenticate('google', {session: false}), (req, res) => {
-    console.log('hi iam loggda344');
+app.get('/auth-success/', passport.authenticate('google', {session: false}), (req, res) => {
     authService.signToken(req, res);
 });
 
@@ -66,7 +79,7 @@ app.get('/api/verify', authService.checkTokenMW, (req, res) => {
     if (null === req.authData) {
         res.sendStatus(403);
     } else {
-        restaurantSchema.find({}, (err, data) => {
+        userSchemaDemo.find({}, (err, data) => {
             res.json(data);
         })
         // res.json(req.authData);

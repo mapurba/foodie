@@ -5,7 +5,7 @@ class Header extends Component {
 		return (
 			<div className="ui segment">
 				<h3 className="ui center aligned header">
-					Buymylooks
+					Food Pep
 				</h3>
 			</div>
 		)

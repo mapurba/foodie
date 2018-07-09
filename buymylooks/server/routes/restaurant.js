@@ -23,18 +23,18 @@ router.put('/edit', authService.checkTokenMW,(req,res) => {
     let updateName = body.updateName;
     //console.log(req.authData.email);
 
-    restaurantSchema.findOneAndUpdate({ email: req.authData.email },{name: updateName}, (err, data,next) =>{
-        if(err) {
-            res.send("error occured");
-        }
-        else{
-            restaurantSchema.save;
-            //res.json(data);
-
-        },() =>{
-
-        }
-    });
+    // restaurantSchema.findOneAndUpdate({ email: req.authData.email },{name: updateName}, (err, data,next) =>{
+    //     if(err) {
+    //         res.send("error occured");
+    //     }
+    //     else{
+    //         restaurantSchema.save;
+    //         //res.json(data);
+    //
+    //     },() =>{
+    //
+    //     }
+    // });
 
 
     // restaurantSchema.find({email: req.authData.email},(err, ress) =>{

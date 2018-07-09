@@ -1,55 +1,76 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router';
+import React, {Component} from 'react';
+import {Redirect} from 'react-router';
 
 import Feed from './Feed';
 import './Feed.css';
 import NetworkHandler from "../api/NetworkHandler";
 
 class FeedContainer extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			loggedIn: true,
-		}
-	}
-	componentWillMount() {
-		window.location.search = "";
-	}
-	signOut = () => {
-		this.setState({
-			loggedIn: false,
-		})
-	}
-	getUsersList =() =>{
-        NetworkHandler.sendRequest("GET", '/api/users/list', null, true, null)
+    namesList = [];
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            loggedIn: true,
+            ResturantList: []
+        }
+    }
+
+    componentWillMount() {
+        window.location.search = "";
+        this.getUsersList();
+    }
+
+    signOut = () => {
+        this.setState({
+            loggedIn: false,
+        })
+    }
+    getUsersList = () => {
+        NetworkHandler.sendRequest("GET", '/api/restaurant/list', null, true, null)
+            .then((response) => {
+                this.state.ResturantList = response.data;
+            })
+            .catch((err) => {
+                throw err;
+            })
+    }
+
+
+    listRes = () => {
+        this.state.ResturantList.map((e) => {
+            return <li>e.email</li>
+        })
+    }
+
+    getUsersDetails = () => {
+        NetworkHandler.sendRequest("GET", '/api/users/details', null, true, null)
             .then((response) => {
                 console.log(response);
             })
             .catch((err) => {
                 throw err;
             })
-	}
-getUsersDetails =() =>{
-    NetworkHandler.sendRequest("GET", '/api/users/details', null, true, null)
-        .then((response) => {
-        console.log(response);
-})
-.catch((err) => {
-        throw err;
-})
-}
-	render() {
-		return (
-			<div>
-				{
-					this.state.loggedIn ?
-						<Feed signOut={this.signOut} getUsersList={this.getUsersList} getUsersDetails={this.getUsersDetails} />
-						: <Redirect to="/login" />
-				}
-			</div>
 
-		)
-	}
+
+    }
+    statee = () => {
+        return this.state;
+    }
+
+
+    render() {
+        return (
+            <div>
+                {
+                    this.state.loggedIn ?
+                        <Feed listRes={this.listRes} statee={this.state}/>
+                        : <Redirect to="/login"/>
+                }
+            </div>
+
+        )
+    }
 }
 
 export default FeedContainer;

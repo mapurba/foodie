@@ -15,7 +15,7 @@ const restaurantSchema = new Schema({
     //#todo add secure methoord for password storing
     admin: {
         type: Boolean,
-        default: true
+        default: false
     },
     created_at: Date,
     updated_at: Date,

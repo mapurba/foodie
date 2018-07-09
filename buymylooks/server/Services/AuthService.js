@@ -12,7 +12,6 @@ exports.checkTokenMW = (req, res, next) => {
                 res.sendStatus(403);
             } else {
                  req.authData = authData;
-                 //console.log(req);
                 next();
             }
         })
@@ -24,15 +23,13 @@ exports.checkTokenMW = (req, res, next) => {
 
 
 // Issue Token
-exports.signToken = (req, res) => {
+exports.signToken = (req, res,redirect_uri) => {
     jwt.sign({userId: req.user._id, email:req.user.email}, 'secretkey', {expiresIn:'60 min'}, (err, token) => {
         if(err){
             res.sendStatus(500);
         } else {
 
             let redirect_uri = 'http://localhost:3000/#/feed';
-
-            console.log('Loggedin User name ',token);
             res.cookie('acccessToken', token);
             res.redirect(redirect_uri);
         }
