@@ -1,52 +1,24 @@
-let mongoose = require('mongoose');
-let Schema = mongoose.Schema;
+'use strict';
 
-// Basic User Schema for Google Authentication
-const restaurantSchema = new Schema({
-    email: {
-        type: String,
-        required: [true, 'email required'],
-        unique: [true, 'email already registered']
-    },
-    name: {
-        type: String,
-        required: false
-    },
-    //#todo add secure methoord for password storing
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema;
 
-    admin: Boolean,
-
-
-    created_at: Date,
-    updated_at: Date,
-    googleId: {
-        type: String,
-        default: null
-    }
+var OrderSchema = new Schema({
+    date: Date,
+    time: String,
+    name: String,
+    amount: Number,
+    _items: [{ type: Schema.ObjectId, ref: 'OrderLine' }],
+    _user: { type: Schema.ObjectId, ref: 'User' },
+    readed: { type: Boolean, default: false },
+    created_at: { type: Date, default: Date.now }
 });
 
-restaurantSchema.methods.customFun = function () {
-    // add some stuff to the users name
-    // this.name = this.name + '-dude';
-
-    return '';
-};
-
-
-// on every save, add the date
-restaurantSchema.pre('save', function (next) {
-    // get the current date
-    var currentDate = new Date();
-
-    // change the updated_at field to current date
-    this.updated_at = currentDate;
-
-    // if created_at doesn't exist, add to that field
-    if (!this.created_at)
-        this.created_at = currentDate;
-
+OrderSchema.pre('save', function(next){
+    this.amount = +this.amount.toFixed(2);
     next();
 });
 
 
-module.exports = mongoose.model('restaurantSchema', restaurantSchema);
+
+module.exports = mongoose.model('Order', OrderSchema);

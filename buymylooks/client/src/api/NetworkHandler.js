@@ -28,9 +28,7 @@ export default {
         return response;
       })
       .catch((err) => {
-        // browserHistory.push('/')
-        //   this.state.loggedIn=false;
-          // browserH istory.push('/login')
+
         throw err;
       });
   }

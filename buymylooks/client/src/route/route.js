@@ -1,24 +1,24 @@
 import React from 'react'
-import {
-	HashRouter as Router,
-	Route
-} from 'react-router-dom'
+import {HashRouter as Router, Route} from 'react-router-dom'
 
 import LoginContainer from './../Login/LoginContainer'
 import FeedContainer from './../Feed/FeedContainer'
 import DashboardContainer from './../Dashboard/DashboardContainer'
-import AdminContainer from './../Admin/AdminContainer'
 
-const Routing = () => (
+export const Routing = () => (
 	<Router>
-		<div>
+        <div>
 			<Route exact path="/" component={LoginContainer} />
 			<Route path="/login" component={LoginContainer} />
-			<Route path="/feed" component={FeedContainer} />
-			<Route path="/dashboard" component={DashboardContainer} />
-			<Route path="/admin" component={AdminContainer} />
-		</div>
+            <Route path="/home" component={DashboardContainer}/>
+        </div>
 	</Router>
 )
 
-export default Routing;
+export const SeconderyRouting = () => (
+	<Router>
+        <div>
+                <Route path="/home/feed" component={FeedContainer} />
+        </div>
+	</Router>
+)

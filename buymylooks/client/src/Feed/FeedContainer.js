@@ -21,11 +21,11 @@ class FeedContainer extends Component {
         this.getUsersList();
     }
 
-    signOut = () => {
-        this.setState({
-            loggedIn: false,
-        })
-    }
+    // signOut = () => {
+    //     this.setState({
+    //         loggedIn: false,
+    //     })
+    // }
     getUsersList = () => {
         NetworkHandler.sendRequest("GET", '/api/restaurant/list', null, true, null)
             .then((response) => {
@@ -62,11 +62,9 @@ class FeedContainer extends Component {
     render() {
         return (
             <div>
-                {
-                    this.state.loggedIn ?
+
                         <Feed listRes={this.listRes} statee={this.state}/>
-                        : <Redirect to="/login"/>
-                }
+
             </div>
 
         )
