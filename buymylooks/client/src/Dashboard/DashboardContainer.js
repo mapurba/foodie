@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Sidebar, Grid, Icon, Image, Menu, Segment,Button} from 'semantic-ui-react'
+import {Sidebar,  Menu, Segment} from 'semantic-ui-react'
 
 import './Dashboard.css';
 import Dashboard from "./Dashboard";
@@ -20,9 +20,9 @@ class DashboardContainer extends Component {
         this.setState({
             log: [`${new Date().toLocaleTimeString()}: ${eventName}`, ...this.state.log].slice(0, 20),
             logCount: this.state.logCount + 1,
-        })
+        });
 	render() {
-        const { log, logCount, visible } = this.state
+        const {  visible } = this.state
 		return (
 		    <div>
             <Sidebar.Pushable as={Segment} className='fullheight' >
@@ -47,9 +47,9 @@ class DashboardContainer extends Component {
                 </Sidebar>
 
                 <Sidebar.Pusher >
-                    <Segment basic >
+                    
                         <Dashboard toggelSideBar={this.handleButtonClick}/>
-                    </Segment>
+                    
                 </Sidebar.Pusher>
             </Sidebar.Pushable>
 </div>

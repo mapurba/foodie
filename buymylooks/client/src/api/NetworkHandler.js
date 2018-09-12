@@ -5,7 +5,7 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 const api = axios.create({
-  baseURL: "http://localhost:8081/",
+  baseURL: "http://localhost:8080/",
   headers: {
   }
 });
@@ -17,10 +17,10 @@ export default {
     };
 
     if (additionalHeaders) {
-      HEADER_CONFIG.headers = additionalHeaders;
+     // HEADER_CONFIG.headers = additionalHeaders;
     }
     if (accessToken) {
-      HEADER_CONFIG.headers['authorization'] = 'bearer '+cookies.get('acccessToken');
+    //  HEADER_CONFIG.headers['authorization'] = 'bearer '+cookies.get('acccessToken');
     }
 
     return processRequest(method, baseQuery, requestData, HEADER_CONFIG)
@@ -37,7 +37,7 @@ export default {
 
 function processRequest(method, endPoint, requestData, headerConfig) {
   if (method === "GET") {
-    return api.get(endPoint, headerConfig);
+    return api.get(endPoint);
   } else if (method === "POST") {
     return api.post(endPoint, requestData, headerConfig);
   } else if (method === "DELETE") {

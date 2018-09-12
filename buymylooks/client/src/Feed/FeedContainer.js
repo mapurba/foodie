@@ -1,5 +1,4 @@
-import React, {Component} from 'react';
-import {Redirect} from 'react-router';
+import React, { Component } from 'react';
 
 import Feed from './Feed';
 import './Feed.css';
@@ -18,7 +17,7 @@ class FeedContainer extends Component {
 
     componentWillMount() {
         window.location.search = "";
-        this.getUsersList();
+        this.getUsersDetails();
     }
 
     // signOut = () => {
@@ -27,13 +26,7 @@ class FeedContainer extends Component {
     //     })
     // }
     getUsersList = () => {
-        NetworkHandler.sendRequest("GET", '/api/restaurant/list', null, true, null)
-            .then((response) => {
-                this.state.ResturantList = response.data;
-            })
-            .catch((err) => {
-                throw err;
-            })
+
     }
 
 
@@ -44,7 +37,7 @@ class FeedContainer extends Component {
     }
 
     getUsersDetails = () => {
-        NetworkHandler.sendRequest("GET", '/api/users/details', null, true, null)
+        NetworkHandler.sendRequest("GET", '/account/detail', null, true, null)
             .then((response) => {
                 console.log(response);
             })
@@ -61,11 +54,11 @@ class FeedContainer extends Component {
 
     render() {
         return (
-            <div>
+            
 
-                        <Feed listRes={this.listRes} statee={this.state}/>
+                <Feed listRes={this.listRes} statee={this.state} />
 
-            </div>
+           
 
         )
     }

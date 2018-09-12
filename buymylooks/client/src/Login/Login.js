@@ -10,14 +10,7 @@ const Login = ({ signIn,signInAsResturant }) => (
 				</div>
 			</div>
 		</div>
-      <div className="sixteen wide column">
-			<div className="loginContainer">
-				<div className="ui button loginButton" onClick={signInAsResturant}>
-					<i className="google icon"></i>
-					Login with Google as Resturant
-				</div>
-			</div>
-		</div>
+      
 	</div>
 )
 
